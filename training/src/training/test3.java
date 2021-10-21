@@ -101,6 +101,10 @@ import java.util.*;
 		this.left_amount = left_amount;
 		this.users = users;
 	}
+	@Override
+	public String toString() {
+		return "data [credit=" + credit + ", left_amount=" + left_amount + ", users=" + users + "]";
+	}
 	 
  }
  
@@ -141,6 +145,10 @@ import java.util.*;
 		this.u_salary = u_salary;
 		this.p = p;
 	}
+	@Override
+	public String toString() {
+		return "data_projects [u_id=" + u_id + ", u_name=" + u_name + ", u_salary=" + u_salary + ", p=" + p + "]";
+	}
 	 
  }
 
@@ -149,7 +157,7 @@ public class test3 {
 	public static void main(String[] args)
 	{
 	data_projects dp1 = new data_projects(1, "User1", 100, new Project("Project1", "ATT",1000));
-	data_projects dp2 = new data_projects(2, "User2", 150, new Project("Project1", "Google",320));
+	data_projects dp2 = new data_projects(2, "User2", 150, new Project("Project2", "Google",320));
 	data_projects dp3 = new data_projects(3, "User3", 500, new Project("Project1", "ATT",1000));
 	
 	List<data_projects> dp_list = new ArrayList<data_projects>();
@@ -165,6 +173,7 @@ public class test3 {
 	for(data_projects dp:dp_list)
 	{
 		String s = dp.getP().getPname();
+		System.out.println(s);
 		User u = new User(dp.getU_id(),dp.getU_name(),dp.getU_salary());
 		if(map.containsKey(s))
 		{
@@ -175,7 +184,7 @@ public class test3 {
 		}
 		else
 		{
-			ArrayList<User> users = new ArrayList<User>();
+			ArrayList<User> users = new ArrayList<>();
 			users.add(u);
 			data d = new data(u.getSalary(), dp.getP().getBudget()-u.getSalary(), users);
 			map.put(s,d);
