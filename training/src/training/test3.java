@@ -31,6 +31,11 @@ import java.util.*;
 		this.company = company;
 		this.budget = budget;
 	}
+	@Override
+	public String toString() {
+		return "Project [pname=" + pname + ", company=" + company + ", budget=" + budget + "]";
+	}
+	
 
 }
  class User {
@@ -157,9 +162,9 @@ public class test3 {
 	public static void main(String[] args)
 	{
 	data_projects dp1 = new data_projects(1, "User1", 100, new Project("Project1", "ATT",1000));
-	data_projects dp2 = new data_projects(2, "User2", 150, new Project("Project2", "Google",320));
+	data_projects dp2 = new data_projects(2, "User2", 350, new Project("Project2", "Google",320));
 	data_projects dp3 = new data_projects(3, "User3", 500, new Project("Project1", "ATT",1000));
-	
+
 	List<data_projects> dp_list = new ArrayList<data_projects>();
 	dp_list.add(dp1);
 	dp_list.add(dp2);
@@ -169,11 +174,13 @@ public class test3 {
 	
 	
 	Map <String, data> map = new HashMap<String, data>();
+	System.out.println("***************************************************");
 	
 	for(data_projects dp:dp_list)
 	{
+		if(dp.getU_salary()<=(dp.getP().getBudget()*1.1)) {
 		String s = dp.getP().getPname();
-		System.out.println(s);
+		//System.out.println(s);
 		User u = new User(dp.getU_id(),dp.getU_name(),dp.getU_salary());
 		if(map.containsKey(s))
 		{
@@ -190,13 +197,29 @@ public class test3 {
 			map.put(s,d);
 			
 		}
+		
+		
 	}
+	}
+	
 	for(String s:map.keySet())
 	{
 		System.out.println(s);
 		System.out.println(map.get(s));
 		System.out.println();
 	}
+	
+	System.out.println("Out of budget");
+	ArrayList<data_projects> ofb = new ArrayList<data_projects>();
+	for(data_projects dp:dp_list)
+	{
+		if(dp.getU_salary()>dp.getP().getBudget())
+		{
+			ofb.add(dp);
+		}
+	}
+	System.out.println("***************");
+System.out.println(ofb);
 	
 	}
 	
