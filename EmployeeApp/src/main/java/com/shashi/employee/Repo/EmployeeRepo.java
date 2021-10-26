@@ -13,5 +13,7 @@ import com.shashi.employee.model.Employee;
 public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
 
 	List<Employee> findByNameIgnoreCase(String name);
+	List<Employee> findAllByCity(String city);
+	List<Employee> findAllByState(String state);
 
 }

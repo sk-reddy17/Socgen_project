@@ -1,6 +1,7 @@
 package com.shashi.employee.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,6 @@ public class EmployeeController {
 	private EmployeeService service;
 	
 	
-	
 	@GetMapping
 	public List<Employee> getall()
 	{
@@ -43,9 +43,9 @@ public class EmployeeController {
 		 
 	}
 	@DeleteMapping("/del/{id}")
-	public void DelEmployee(@PathVariable int id)
+	public ResponseEntity<String> DelEmployee(@PathVariable int id)
 	{
-		service.DelEmployee(id);
+		return service.DelEmployee(id);
 	}
 	
 	@GetMapping("/by/c/{city}")
@@ -57,6 +57,11 @@ public class EmployeeController {
 	public List<Employee> getByState(@PathVariable String state)
 	{
 		return service.searchByState(state);
+	}
+	@GetMapping("/{name}")
+	public List<Employee> getByName(@PathVariable String name)
+	{
+		return service.getEmployee(name);
 	}
  
 	

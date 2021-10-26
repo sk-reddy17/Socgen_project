@@ -34,7 +34,8 @@ public class ImplEmployeeService implements EmployeeService {
 		Employee ep = reposi.findById(id).get();
 		ep.setName(e.getName());
         ep.setSalary( e.getSalary());
-        //ep.setAddressList();
+        ep.setState(e.getState());
+        ep.setCity(e.getCity());
 
         return reposi.save(ep);
     }
@@ -53,14 +54,19 @@ public class ImplEmployeeService implements EmployeeService {
 
 	@Override
 	public List<Employee> searchByCity(String city) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Employee> elist =reposi.findAllByCity(city);
+		elist = elist.stream().filter(s->s.getCity().equals(city)).collect(Collectors.toList());
+		
+		return elist;
 	}
 
 	@Override
 	public List<Employee> searchByState(String state) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Employee> elist =reposi.findAllByState(state);
+		elist = elist.stream().filter(s->s.getCity().equals(state)).collect(Collectors.toList());
+		
+		return elist;
 	}
 
 
