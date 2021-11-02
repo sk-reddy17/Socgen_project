@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 	
 	
+	
 	@GetMapping("/add/{x}/{y}")
 public int add(@PathVariable int x, @PathVariable int y)
 {
