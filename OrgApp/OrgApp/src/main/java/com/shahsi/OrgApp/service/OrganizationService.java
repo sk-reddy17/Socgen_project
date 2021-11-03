@@ -1,10 +1,13 @@
 package com.shahsi.OrgApp.service;
 
 import com.shahsi.OrgApp.dto.OrganizationDto;
+import com.shahsi.OrgApp.entity.Employee;
 import com.shahsi.OrgApp.entity.Organization;
 import com.shahsi.OrgApp.mapper.Emapper;
 import com.shahsi.OrgApp.repository.OrganizationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -53,7 +56,7 @@ public class OrganizationService {
                 empcost += org.getProjects().get(i).getEmployees().get(j).getSalary();
             }
         }
-        empcost += 0.01*empcost;
+        empcost += 0.01 * empcost;
         //return "EmployeeCost for a proect BUDGET = " + empcost;
         return empcost;
     }
@@ -65,6 +68,17 @@ public class OrganizationService {
         String print = "The total revenue of the Company "+ org.getOrgName() + " = " +revenue + "\n"
                  + "The total profit of the Company = " + (revenue - budget);
         return print;
+    }
+    public ResponseEntity<String> deleteOrg(String  orgId)
+    {
+      Organization org = repos.findByOrgId(orgId);
+        if(Objects.nonNull(org))
+        {
+            repos.delete(org);
+        }
+        return ResponseEntity.status(HttpStatus.NON_AUTHORITATIVE_INFORMATION)
+                .body("***********Deleted "+ org.getOrgName()+"Successfully************");
+
     }
 
 }

@@ -5,6 +5,7 @@ import com.shahsi.OrgApp.entity.Organization;
 import com.shahsi.OrgApp.mapper.Emapper;
 import com.shahsi.OrgApp.service.OrganizationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,6 +50,18 @@ public class OrganizationController {
     {
         return  service.status(orgId);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delOrg(@PathVariable("id") String orgId)
+    {
+        return service.deleteOrg(orgId);
+    }
+
+
+
+
+
+
+
 
 
 
